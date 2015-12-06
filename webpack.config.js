@@ -5,7 +5,12 @@ module.exports = {
     context: __dirname,
 
     entry: {
-        main: "./main.jsx"
+        main: "./main.jsx",
+        iframe: "./iframe.jsx",
+        sample1: "./sample1.jsx",
+        sample2: "./sample2.jsx",
+        sample3: "./sample3.jsx",
+        sample4: "./sample4.jsx"
     },
 
     output: {
@@ -16,8 +21,8 @@ module.exports = {
 
     module: {
 	    loaders: [
-            { test: /.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /.js?$/, loader: 'babel-loader', exclude: /node_modules/ }
+            { test: /.jsx?$/, loaders: ['react-hot', 'babel-loader'], exclude: /node_modules/ },
+            { test: /.js?$/, loaders: ['react-hot', 'babel-loader'], exclude: /node_modules/ }
 	    ]
     },
 
@@ -26,9 +31,11 @@ module.exports = {
     },
 
 	externals: {
+        // "jquery": "$",
 	},
 
 	plugins: [
+	  new webpack.HotModuleReplacementPlugin(),
 		new webpack.PrefetchPlugin("react"),
         new webpack.optimize.CommonsChunkPlugin(
           {
